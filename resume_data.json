@@ -1,0 +1,80 @@
+{
+  "personal": {
+    "name": "FIRSTNAME LASTNAME",
+    "phone": "+1 (555) 000-0000",
+    "location": "City, State / Country",
+    "email": "your.email@example.com",
+    "linkedin": "https://www.linkedin.com/in/your-profile/",
+    "github": "https://github.com/your-username"
+  },
+  "summary": "Software Engineer with 3+ years of experience building scalable web applications, distributed backend services, and cloud-native solutions. Skilled in modern programming languages, system architecture, RESTful APIs, relational and NoSQL databases, and automated CI/CD pipelines. Passionate about delivering clean, maintainable code, optimizing system performance, and collaborating in agile, cross-functional engineering teams.",
+  "skills": {
+    "languages": "Python, JavaScript, TypeScript, Go, Java, C++, SQL, HTML5, CSS3",
+    "backend_frameworks": "FastAPI, Node.js, Express, Django, React, RESTful APIs, Microservices, Asynchronous Processing, Distributed Systems",
+    "databases_caching": "PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Vector Databases",
+    "cloud_devops": "AWS (EC2, S3, Lambda, SQS), Docker, Kubernetes, CI/CD Pipelines, Terraform, Linux/Unix, Git"
+  },
+  "experience": [
+    {
+      "company": "Company Name Inc. — City, State/Country",
+      "date": "Month 2023 – Present",
+      "role": "Software Engineer / Role Title",
+      "projects": [
+        {
+          "name": "Project: Core Platform Architecture & Automation",
+          "bullets": [
+            "Architected and deployed scalable backend microservices using Python, FastAPI, and PostgreSQL, reducing processing latency by <strong>45%</strong> across high-throughput endpoints.",
+            "Designed distributed, asynchronous message-queuing pipelines using Redis and Celery, reliably processing over <strong>1M+</strong> daily events with zero data loss.",
+            "Optimized database schemas and complex analytical queries, resulting in a <strong>35% reduction</strong> in query execution times and improved resource efficiency.",
+            "Implemented automated CI/CD pipelines, containerized deployments via Docker and Kubernetes, and boosted test coverage to <strong>92%+</strong>.",
+            "Collaborated with cross-functional teams to design robust API contracts and system architectures meeting enterprise compliance standards."
+          ]
+        },
+        {
+          "name": "Project: Internal Analytics & Tooling Platform",
+          "bullets": [
+            "Built an internal monitoring and analytics dashboard using React and REST APIs, empowering engineering teams to diagnose production alerts <strong>50% faster</strong>.",
+            "Integrated secure role-based access control (RBAC) and OAuth2 authentication for enterprise-wide authorization and session management."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Previous Company LLC — City, State/Country",
+      "date": "Month 2021 – Month 2023",
+      "role": "Associate Software Engineer",
+      "projects": [
+        {
+          "name": "Core Platform Maintenance & Integrations",
+          "bullets": [
+            "Developed modular backend services and integrated third-party RESTful APIs, streamlining data ingestion workflows for core client applications.",
+            "Participated in sprint planning, code reviews, and pair programming, contributing to high-quality codebases and adherence to best development practices.",
+            "Resolved critical production bugs and improved system uptime to <strong>99.9%</strong> through proactive logging and monitoring."
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Open-Source Cloud Orchestration Platform",
+      "bullets": [
+        "Engineered a full-stack orchestration application using <strong>Python, React, and Docker</strong>, featuring dynamic scheduling, conditional task routing, and real-time execution telemetry.",
+        "Implemented secure API gateway routing with token-based authentication and rate limiting, reducing unauthorized request volume by <strong>95%</strong>."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University / College Name",
+      "location": "City, State, Country",
+      "degree": "Bachelor of Science in Computer Science (B.S.) — GPA: 3.8 / 4.0",
+      "period": "2019 – 2023"
+    }
+  ],
+  "certifications": [
+    "<strong>Cloud Certification:</strong> AWS Certified Solutions Architect / Associate Developer.",
+    "<strong>Industry Certification:</strong> Certified Kubernetes Application Developer (CKAD).",
+    "<strong>Company Recognition:</strong> Outstanding Performance Award for impactful engineering contributions and leadership."
+  ]
+}

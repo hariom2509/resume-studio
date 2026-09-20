@@ -1,0 +1,183 @@
+%-------------------------
+% Resume in LaTeX
+% Author : FIRSTNAME LASTNAME
+% Generated via Resume Creator
+%------------------------
+
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{times}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.2in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape FIRSTNAME LASTNAME} \\ \vspace{2pt}
+    \small \color{NavyBlue} +1 (555) 000-0000 \ $|$ \ City, State / Country \ $|$ \ \href{mailto:your.email@example.com}{\color{NavyBlue}your.email@example.com} \ $|$ \ \href{https://www.linkedin.com/in/your-profile/}{\color{NavyBlue}LinkedIn} \ $|$ \ \href{https://github.com/your-username}{\color{NavyBlue}GitHub}
+\end{center}
+
+%-----------PROFILE SUMMARY-----------
+\section{Profile Summary}
+  \vspace{1pt}
+  \small{
+    Software Engineer with 3+ years of experience building scalable web applications, distributed backend services, and cloud-native solutions. Skilled in modern programming languages, system architecture, RESTful APIs, relational and NoSQL databases, and automated CI/CD pipelines. Passionate about delivering clean, maintainable code, optimizing system performance, and collaborating in agile, cross-functional engineering teams.
+  }
+  \vspace{-2pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages:} Python, JavaScript, TypeScript, Go, Java, C++, SQL, HTML5, CSS3 \\ \vspace{1pt}
+     \textbf{Backend Frameworks:} FastAPI, Node.js, Express, Django, React, RESTful APIs, Microservices, Asynchronous Processing, Distributed Systems \\ \vspace{1pt}
+     \textbf{Databases Caching:} PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Vector Databases \\ \vspace{1pt}
+     \textbf{Cloud Devops:} AWS (EC2, S3, Lambda, SQS), Docker, Kubernetes, CI/CD Pipelines, Terraform, Linux/Unix, Git \\ \vspace{1pt}
+    }}
+ \end{itemize}
+ \vspace{-14pt}
+
+%-----------EXPERIENCE-----------
+\section{Professional Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Company Name Inc. --- City, State/Country}{Month 2023 -- Present}
+      {Software Engineer / Role Title}{}
+
+    \vspace{2pt}
+    \textbf{\small Project: Core Platform Architecture & Automation}
+    \resumeItemListStart
+      \resumeItem{Architected and deployed scalable backend microservices using Python, FastAPI, and PostgreSQL, reducing processing latency by \textbf{45\%} across high-throughput endpoints.}
+      \resumeItem{Designed distributed, asynchronous message-queuing pipelines using Redis and Celery, reliably processing over \textbf{1M+} daily events with zero data loss.}
+      \resumeItem{Optimized database schemas and complex analytical queries, resulting in a \textbf{35\% reduction} in query execution times and improved resource efficiency.}
+      \resumeItem{Implemented automated CI/CD pipelines, containerized deployments via Docker and Kubernetes, and boosted test coverage to \textbf{92\%+}.}
+      \resumeItem{Collaborated with cross-functional teams to design robust API contracts and system architectures meeting enterprise compliance standards.}
+    \resumeItemListEnd
+
+    \vspace{2pt}
+    \textbf{\small Project: Internal Analytics & Tooling Platform}
+    \resumeItemListStart
+      \resumeItem{Built an internal monitoring and analytics dashboard using React and REST APIs, empowering engineering teams to diagnose production alerts \textbf{50\% faster}.}
+      \resumeItem{Integrated secure role-based access control (RBAC) and OAuth2 authentication for enterprise-wide authorization and session management.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Previous Company LLC --- City, State/Country}{Month 2021 -- Month 2023}
+      {Associate Software Engineer}{}
+
+    \vspace{2pt}
+    \textbf{\small Core Platform Maintenance & Integrations}
+    \resumeItemListStart
+      \resumeItem{Developed modular backend services and integrated third-party RESTful APIs, streamlining data ingestion workflows for core client applications.}
+      \resumeItem{Participated in sprint planning, code reviews, and pair programming, contributing to high-quality codebases and adherence to best development practices.}
+      \resumeItem{Resolved critical production bugs and improved system uptime to \textbf{99.9\%} through proactive logging and monitoring.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+  \vspace{-12pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \vspace{1pt}
+    \textbf{\small Open-Source Cloud Orchestration Platform}
+    \resumeItemListStart
+      \resumeItem{Engineered a full-stack orchestration application using \textbf{Python, React, and Docker}, featuring dynamic scheduling, conditional task routing, and real-time execution telemetry.}
+      \resumeItem{Implemented secure API gateway routing with token-based authentication and rate limiting, reducing unauthorized request volume by \textbf{95\%}.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+  \vspace{-12pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {University / College Name}{City, State, Country}
+      {Bachelor of Science in Computer Science (B.S.) --- GPA: 3.8 / 4.0}{2019 -- 2023}
+
+  \resumeSubHeadingListEnd
+  \vspace{-12pt}
+
+%-----------CERTIFICATIONS & AWARDS-----------
+\section{Certifications \& Awards}
+ \begin{itemize}[leftmargin=0.15in, label=\tiny$\bullet$]
+    \resumeItem{\textbf{Cloud Certification:} AWS Certified Solutions Architect / Associate Developer.}
+    \resumeItem{\textbf{Industry Certification:} Certified Kubernetes Application Developer (CKAD).}
+    \resumeItem{\textbf{Company Recognition:} Outstanding Performance Award for impactful engineering contributions and leadership.}
+
+ \end{itemize}
+
+%-------------------------------------------
+\end{document}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FIRSTNAME LASTNAME — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 10mm 14mm 8mm 14mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Lora', 'Times New Roman', 'Latin Modern Roman', Times, serif;
+    font-size: 8.8pt;
+    line-height: 1.25;
+    color: #000;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .resume-container {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 8mm 14mm 6mm 14mm;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .name {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #000;
+    margin-bottom: 2px;
+  }
+
+  .contact-info {
+    font-size: 8.5pt;
+    color: #004f9e;
+  }
+
+  .contact-info a {
+    color: #004f9e;
+    text-decoration: underline;
+  }
+
+  .contact-info a:hover {
+    color: #002b5c;
+  }
+
+  .contact-info span.sep {
+    color: #004f9e;
+    margin: 0 4px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* Section Styles */
+  .section {
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+
+  .section-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #000;
+    border-bottom: 0.8pt solid #000;
+    padding-bottom: 1px;
+    margin-bottom: 3px;
+    text-transform: none;
+  }
+
+  .section-title.uppercase {
+    text-transform: uppercase;
+  }
+
+  /* Content */
+  p, .text-block {
+    font-size: 8.6pt;
+    text-align: justify;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+
+  /* Skills */
+  .skill-group {
+    font-size: 8.5pt;
+    line-height: 1.24;
+    margin-bottom: 1.5px;
+    text-align: justify;
+  }
+
+  .skill-label {
+    font-weight: 700;
+  }
+
+  /* Split Row */
+  .row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 8.8pt;
+  }
+
+  .company-name {
+    font-weight: 700;
+    color: #000;
+  }
+
+  .date-range {
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  .role-title {
+    font-style: italic;
+    font-weight: 600;
+    font-size: 8.6pt;
+    margin-bottom: 1px;
+  }
+
+  .project-heading {
+    font-weight: 700;
+    font-size: 8.6pt;
+    margin-top: 2.5px;
+    margin-bottom: 1px;
+  }
+
+  /* Bullet Lists */
+  ul {
+    margin: 0;
+    padding-left: 14px;
+    list-style-type: disc;
+  }
+
+  li {
+    font-size: 8.4pt;
+    line-height: 1.23;
+    margin-bottom: 1.5px;
+    text-align: justify;
+  }
+
+  li strong {
+    font-weight: 700;
+  }
+
+  /* Education */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 8.8pt;
+  }
+
+  .edu-school {
+    font-weight: 700;
+  }
+
+  .edu-location {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .edu-degree {
+    font-style: italic;
+    font-size: 8.6pt;
+  }
+
+  .edu-years {
+    font-style: italic;
+    white-space: nowrap;
+    font-size: 8.6pt;
+  }
+
+  @media print {
+    body {
+      background: #fff;
+    }
+    .resume-container {
+      padding: 0;
+      width: 100%;
+    }
+    .contact-info a {
+      color: #004f9e !important;
+      text-decoration: underline !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="resume-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="name">FIRSTNAME LASTNAME</div>
+    <div class="contact-info">
+      <a href="tel:+1 (555) 000-0000">+1 (555) 000-0000</a><span class="sep">|</span>
+      <span>City, State / Country</span><span class="sep">|</span>
+      <a href="mailto:your.email@example.com">your.email@example.com</a><span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/your-profile/" target="_blank">LinkedIn</a><span class="sep">|</span>
+      <a href="https://github.com/your-username" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Profile Summary -->
+  <div class="section">
+    <div class="section-title">Profile Summary</div>
+    <p>
+      Software Engineer with 3+ years of experience building scalable web applications, distributed backend services, and cloud-native solutions. Skilled in modern programming languages, system architecture, RESTful APIs, relational and NoSQL databases, and automated CI/CD pipelines. Passionate about delivering clean, maintainable code, optimizing system performance, and collaborating in agile, cross-functional engineering teams.
+    </p>
+  </div>
+
+  <!-- Technical Skills -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skill-group">
+      <span class="skill-label">Languages:</span> Python, JavaScript, TypeScript, Go, Java, C++, SQL, HTML5, CSS3
+    </div>
+    <div class="skill-group">
+      <span class="skill-label">Backend Frameworks:</span> FastAPI, Node.js, Express, Django, React, RESTful APIs, Microservices, Asynchronous Processing, Distributed Systems
+    </div>
+    <div class="skill-group">
+      <span class="skill-label">Databases Caching:</span> PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, Vector Databases
+    </div>
+    <div class="skill-group">
+      <span class="skill-label">Cloud Devops:</span> AWS (EC2, S3, Lambda, SQS), Docker, Kubernetes, CI/CD Pipelines, Terraform, Linux/Unix, Git
+    </div>
+  </div>
+
+  <!-- Professional Experience -->
+  <div class="section">
+    <div class="section-title">Professional Experience</div>
+
+    <div class="row-between">
+      <span class="company-name">Company Name Inc. — City, State/Country</span>
+      <span class="date-range">Month 2023 – Present</span>
+    </div>
+    <div class="role-title">Software Engineer / Role Title</div>
+
+    <div class="project-heading">Project: Core Platform Architecture & Automation</div>
+    <ul>
+      <li>Architected and deployed scalable backend microservices using Python, FastAPI, and PostgreSQL, reducing processing latency by <strong>45%</strong> across high-throughput endpoints.</li>
+      <li>Designed distributed, asynchronous message-queuing pipelines using Redis and Celery, reliably processing over <strong>1M+</strong> daily events with zero data loss.</li>
+      <li>Optimized database schemas and complex analytical queries, resulting in a <strong>35% reduction</strong> in query execution times and improved resource efficiency.</li>
+      <li>Implemented automated CI/CD pipelines, containerized deployments via Docker and Kubernetes, and boosted test coverage to <strong>92%+</strong>.</li>
+      <li>Collaborated with cross-functional teams to design robust API contracts and system architectures meeting enterprise compliance standards.</li>
+    </ul>
+
+    <div class="project-heading">Project: Internal Analytics & Tooling Platform</div>
+    <ul>
+      <li>Built an internal monitoring and analytics dashboard using React and REST APIs, empowering engineering teams to diagnose production alerts <strong>50% faster</strong>.</li>
+      <li>Integrated secure role-based access control (RBAC) and OAuth2 authentication for enterprise-wide authorization and session management.</li>
+    </ul>
+
+    <div class="row-between">
+      <span class="company-name">Previous Company LLC — City, State/Country</span>
+      <span class="date-range">Month 2021 – Month 2023</span>
+    </div>
+    <div class="role-title">Associate Software Engineer</div>
+
+    <div class="project-heading">Core Platform Maintenance & Integrations</div>
+    <ul>
+      <li>Developed modular backend services and integrated third-party RESTful APIs, streamlining data ingestion workflows for core client applications.</li>
+      <li>Participated in sprint planning, code reviews, and pair programming, contributing to high-quality codebases and adherence to best development practices.</li>
+      <li>Resolved critical production bugs and improved system uptime to <strong>99.9%</strong> through proactive logging and monitoring.</li>
+    </ul>
+
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="project-heading" style="margin-top: 1px;">Open-Source Cloud Orchestration Platform</div>
+    <ul>
+      <li>Engineered a full-stack orchestration application using <strong>Python, React, and Docker</strong>, featuring dynamic scheduling, conditional task routing, and real-time execution telemetry.</li>
+      <li>Implemented secure API gateway routing with token-based authentication and rate limiting, reducing unauthorized request volume by <strong>95%</strong>.</li>
+    </ul>
+
+  </div>
+
+  <!-- Education -->
+  <div class="section">
+    <div class="section-title uppercase">EDUCATION</div>
+
+    <div class="edu-row">
+      <span class="edu-school">University / College Name</span>
+      <span class="edu-location">City, State, Country</span>
+    </div>
+    <div class="edu-row">
+      <span class="edu-degree">Bachelor of Science in Computer Science (B.S.) — GPA: 3.8 / 4.0</span>
+      <span class="edu-years">2019 – 2023</span>
+    </div>
+
+  </div>
+
+  <!-- Certifications & Awards -->
+  <div class="section">
+    <div class="section-title uppercase">CERTIFICATIONS &amp; AWARDS</div>
+    <ul>
+      <li><strong>Cloud Certification:</strong> AWS Certified Solutions Architect / Associate Developer.</li>
+      <li><strong>Industry Certification:</strong> Certified Kubernetes Application Developer (CKAD).</li>
+      <li><strong>Company Recognition:</strong> Outstanding Performance Award for impactful engineering contributions and leadership.</li>
+    </ul>
+
+  </div>
+
+</div>
+
+</body>
+</html>
