@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Resume Creator & Generator
-Author: Resume Creator
+Author: Hari Om
 Description: Reads `resume_data.json` and renders both `resume.html` and `resume.tex`.
 Usage:
     python generate.py          # Builds resume.html and resume.tex
@@ -39,34 +39,54 @@ def html_to_latex(text):
     text = re.sub(r"<b>(.*?)</b>", r"\\textbf{\1}", text)
     text = re.sub(r"<em>(.*?)</em>", r"\\textit{\1}", text)
     text = re.sub(r"<i>(.*?)</i>", r"\\textit{\1}", text)
-    text = text.replace("&amp;", "\\&")
-    text = text.replace("%", "\\%")
-    text = text.replace("$", "\\$")
-    text = text.replace("_", "\\_")
+    text = text.replace("\\&", "&").replace("&amp;", "&").replace("&", "\\&")
+    text = text.replace("\\%", "%").replace("%", "\\%")
+    text = text.replace("\\$", "$").replace("$", "\\$")
+    text = text.replace("\\_", "_").replace("_", "\\_")
     text = text.replace("–", "--")
     text = text.replace("—", "---")
     return text
 
 
 def build_html(data):
-    p = data["personal"]
-    skills = data["skills"]
+    p = data.get("personal", {})
+    skills = data.get("skills", {})
     
+    # Render Contact Info
+    contact_parts = []
+    if p.get("phone"):
+        contact_parts.append(f'<a href="tel:{p["phone"]}">{p["phone"]}</a>')
+    if p.get("location"):
+        contact_parts.append(f'<span>{p["location"]}</span>')
+    if p.get("email"):
+        contact_parts.append(f'<a href="mailto:{p["email"]}">{p["email"]}</a>')
+    if p.get("linkedin"):
+        l_url = p["linkedin"] if p["linkedin"].startswith("http") else f"https://{p['linkedin']}"
+        contact_parts.append(f'<a href="{l_url}" target="_blank">LinkedIn</a>')
+    if p.get("github"):
+        g_url = p["github"] if p["github"].startswith("http") else f"https://{p['github']}"
+        contact_parts.append(f'<a href="{g_url}" target="_blank">GitHub</a>')
+    contact_html = ' <span class="sep">|</span> '.join(contact_parts)
+
     # Render Experience
     exp_html = ""
     for exp in data.get("experience", []):
         exp_html += f"""
     <div class="row-between">
-      <span class="company-name">{exp['company']}</span>
-      <span class="date-range">{exp['date']}</span>
+      <span class="company-name">{exp.get('company', '')}</span>
+      <span class="date-range">{exp.get('date', '')}</span>
     </div>
-    <div class="role-title">{exp['role']}</div>
+    <div class="role-title">{exp.get('role', '')}</div>
 """
+        if exp.get("bullets"):
+            exp_html += "    <ul>\n"
+            for bullet in exp.get("bullets", []):
+                exp_html += f"      <li>{bullet}</li>\n"
+            exp_html += "    </ul>\n"
         for proj in exp.get("projects", []):
-            exp_html += f"""
-    <div class="project-heading">{proj['name']}</div>
-    <ul>
-"""
+            if proj.get("name"):
+                exp_html += f"""    <div class="project-heading">{proj['name']}</div>\n"""
+            exp_html += "    <ul>\n"
             for bullet in proj.get("bullets", []):
                 exp_html += f"      <li>{bullet}</li>\n"
             exp_html += "    </ul>\n"
@@ -75,35 +95,35 @@ def build_html(data):
     proj_html = ""
     for proj in data.get("projects", []):
         proj_html += f"""
-    <div class="project-heading" style="margin-top: 1px;">{proj['name']}</div>
+    <div class="project-heading" style="margin-top: 1px;">{proj.get('name', '')}</div>
     <ul>
 """
         for bullet in proj.get("bullets", []):
             proj_html += f"      <li>{bullet}</li>\n"
         proj_html += "    </ul>\n"
 
+    proj_section_html = ""
+    if data.get("projects"):
+        proj_section_html = f"""
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">PROJECTS</div>
+{proj_html}  </div>
+"""
+
     # Render Education
     edu_html = ""
     for edu in data.get("education", []):
         edu_html += f"""
     <div class="edu-row">
-      <span class="edu-school">{edu['institution']}</span>
-      <span class="edu-location">{edu['location']}</span>
+      <span class="edu-school">{edu.get('institution', '')}</span>
+      <span class="edu-location">{edu.get('location', '')}</span>
     </div>
     <div class="edu-row">
-      <span class="edu-degree">{edu['degree']}</span>
-      <span class="edu-years">{edu['period']}</span>
+      <span class="edu-degree">{edu.get('degree', '')}</span>
+      <span class="edu-years">{edu.get('period', '')}</span>
     </div>
 """
-
-    # Render Skills dynamically
-    skills_html = ""
-    for k, v in skills.items():
-        label = k.replace("_", " ").title()
-        val = str(v).replace("&", "&amp;")
-        skills_html += f"""    <div class="skill-group">
-      <span class="skill-label">{label}:</span> {val}
-    </div>\n"""
 
     # Render Certifications
     cert_html = "    <ul>\n"
@@ -111,12 +131,30 @@ def build_html(data):
         cert_html += f"      <li>{cert}</li>\n"
     cert_html += "    </ul>\n"
 
+    # Render Skills
+    skills_html = ""
+    for cat, items in skills.items():
+        cat_display = cat
+        if not any(c.isupper() for c in cat_display):
+            cat_display = cat_display.replace("_", " ").title()
+        elif "_" in cat_display and " " not in cat_display:
+            cat_display = cat_display.replace("_", " ").title()
+        cat_escaped = cat_display.replace("&", "&amp;")
+        if isinstance(items, list):
+            items_str = ", ".join(str(x) for x in items)
+        else:
+            items_str = str(items)
+        items_escaped = items_str.replace("&", "&amp;")
+        skills_html += f"""    <div class="skill-group">
+      <span class="skill-label">{cat_escaped}:</span> {items_escaped}
+    </div>\n"""
+
     html_template = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>{p['name']} — Resume</title>
+<title>{p.get('name', 'Resume')} - Resume</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -178,7 +216,7 @@ def build_html(data):
 
   .contact-info span.sep {{
     color: #004f9e;
-    margin: 0 4px;
+    margin: 0 1px;
     text-decoration: none;
     display: inline-block;
   }}
@@ -323,19 +361,15 @@ def build_html(data):
 
   <!-- Header -->
   <div class="header">
-    <div class="name">{p['name']}</div>
+    <div class="name">{p.get('name', 'Resume')}</div>
     <div class="contact-info">
-      <a href="tel:{p['phone']}">{p['phone']}</a><span class="sep">|</span>
-      <span>{p['location']}</span><span class="sep">|</span>
-      <a href="mailto:{p['email']}">{p['email']}</a><span class="sep">|</span>
-      <a href="{p['linkedin']}" target="_blank">LinkedIn</a><span class="sep">|</span>
-      <a href="{p['github']}" target="_blank">GitHub</a>
+      {contact_html}
     </div>
   </div>
 
   <!-- Profile Summary -->
   <div class="section">
-    <div class="section-title">Profile Summary</div>
+    <div class="section-title">PROFILE SUMMARY</div>
     <p>
       {data.get('summary', '')}
     </p>
@@ -343,30 +377,24 @@ def build_html(data):
 
   <!-- Technical Skills -->
   <div class="section">
-    <div class="section-title">Technical Skills</div>
+    <div class="section-title">TECHNICAL SKILLS</div>
 {skills_html}  </div>
 
   <!-- Professional Experience -->
   <div class="section">
-    <div class="section-title">Professional Experience</div>
-{exp_html}
-  </div>
-
-  <!-- Projects -->
-  <div class="section">
-    <div class="section-title">Projects</div>
-{proj_html}
-  </div>
+    <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+{exp_html}  </div>
+{proj_section_html}
 
   <!-- Education -->
   <div class="section">
-    <div class="section-title uppercase">EDUCATION</div>
+    <div class="section-title">EDUCATION</div>
 {edu_html}
   </div>
 
   <!-- Certifications & Awards -->
   <div class="section">
-    <div class="section-title uppercase">CERTIFICATIONS &amp; AWARDS</div>
+    <div class="section-title">CERTIFICATIONS &amp; AWARDS</div>
 {cert_html}
   </div>
 
@@ -379,23 +407,44 @@ def build_html(data):
 
 
 def build_tex(data):
-    p = data["personal"]
-    skills = data["skills"]
+    p = data.get("personal", {})
+    skills = data.get("skills", {})
+
+    contact_tex_parts = []
+    if p.get("phone"):
+        contact_tex_parts.append(html_to_latex(p["phone"]))
+    if p.get("location"):
+        contact_tex_parts.append(html_to_latex(p["location"]))
+    if p.get("email"):
+        contact_tex_parts.append(f'\\href{{mailto:{p["email"]}}}{{\\color{{NavyBlue}}{html_to_latex(p["email"])}}}')
+    if p.get("linkedin"):
+        l_url = p["linkedin"] if p["linkedin"].startswith("http") else f"https://{p['linkedin']}"
+        contact_tex_parts.append(f'\\href{{{l_url}}}{{\\color{{NavyBlue}}LinkedIn}}')
+    if p.get("github"):
+        g_url = p["github"] if p["github"].startswith("http") else f"https://{p['github']}"
+        contact_tex_parts.append(f'\\href{{{g_url}}}{{\\color{{NavyBlue}}GitHub}}')
+    contact_tex = ' \\ $|$ \\ '.join(contact_tex_parts)
 
     # Render Experience
     exp_tex = ""
     for exp in data.get("experience", []):
         exp_tex += f"""
     \\resumeSubheading
-      {{{html_to_latex(exp['company'])}}}{{{html_to_latex(exp['date'])}}}
-      {{{html_to_latex(exp['role'])}}}{{}}
+      {{{html_to_latex(exp.get('company', ''))}}}{{{html_to_latex(exp.get('date', ''))}}}
+      {{{html_to_latex(exp.get('role', ''))}}}{{}}
 """
+        if exp.get("bullets"):
+            exp_tex += "    \\resumeItemListStart\n"
+            for bullet in exp.get("bullets", []):
+                exp_tex += f"      \\resumeItem{{{html_to_latex(bullet)}}}\n"
+            exp_tex += "    \\resumeItemListEnd\n"
         for proj in exp.get("projects", []):
-            exp_tex += f"""
+            if proj.get("name"):
+                exp_tex += f"""
     \\vspace{{2pt}}
     \\textbf{{\\small {html_to_latex(proj['name'])}}}
-    \\resumeItemListStart
 """
+            exp_tex += "    \\resumeItemListStart\n"
             for bullet in proj.get("bullets", []):
                 exp_tex += f"      \\resumeItem{{{html_to_latex(bullet)}}}\n"
             exp_tex += "    \\resumeItemListEnd\n"
@@ -405,20 +454,30 @@ def build_tex(data):
     for proj in data.get("projects", []):
         proj_tex += f"""
     \\vspace{{1pt}}
-    \\textbf{{\\small {html_to_latex(proj['name'])}}}
+    \\textbf{{\\small {html_to_latex(proj.get('name', ''))}}}
     \\resumeItemListStart
 """
         for bullet in proj.get("bullets", []):
             proj_tex += f"      \\resumeItem{{{html_to_latex(bullet)}}}\n"
         proj_tex += "    \\resumeItemListEnd\n"
 
+    proj_section_tex = ""
+    if data.get("projects"):
+        proj_section_tex = f"""
+%-----------PROJECTS-----------
+\\section{{PROJECTS}}
+  \\resumeSubHeadingListStart
+{proj_tex}  \\resumeSubHeadingListEnd
+  \\vspace{{-12pt}}
+"""
+
     # Render Education
     edu_tex = ""
     for edu in data.get("education", []):
         edu_tex += f"""
     \\resumeSubheading
-      {{{html_to_latex(edu['institution'])}}}{{{html_to_latex(edu['location'])}}}
-      {{{html_to_latex(edu['degree'])}}}{{{html_to_latex(edu['period'])}}}
+      {{{html_to_latex(edu.get('institution', ''))}}}{{{html_to_latex(edu.get('location', ''))}}}
+      {{{html_to_latex(edu.get('degree', ''))}}}{{{html_to_latex(edu.get('period', ''))}}}
 """
 
     # Render Certifications
@@ -426,18 +485,25 @@ def build_tex(data):
     for cert in data.get("certifications", []):
         cert_tex += f"    \\resumeItem{{{html_to_latex(cert)}}}\n"
 
-    summary_tex = html_to_latex(data.get('summary', ''))
-
-    # Render Skills dynamically
+    # Render Skills
     skills_tex = ""
-    for k, v in skills.items():
-        label = html_to_latex(k.replace("_", " ").title())
-        val = html_to_latex(str(v))
-        skills_tex += f"     \\textbf{{{label}:}} {val} \\\\ \\vspace{{1pt}}\n"
+    for cat, items in skills.items():
+        cat_display = cat
+        if not any(c.isupper() for c in cat_display):
+            cat_display = cat_display.replace("_", " ").title()
+        elif "_" in cat_display and " " not in cat_display:
+            cat_display = cat_display.replace("_", " ").title()
+        if isinstance(items, list):
+            items_str = ", ".join(str(x) for x in items)
+        else:
+            items_str = str(items)
+        skills_tex += f"     \\textbf{{{html_to_latex(cat_display)}:}} {html_to_latex(items_str)} \\\\ \\vspace{{1pt}}\n"
+
+    summary_tex = html_to_latex(data.get('summary', ''))
 
     tex_template = f"""%-------------------------
 % Resume in LaTeX
-% Author : {p['name']}
+% Author : {p.get('name', 'Resume')}
 % Generated via Resume Creator
 %------------------------
 
@@ -523,7 +589,7 @@ def build_tex(data):
 \\end{{center}}
 
 %-----------PROFILE SUMMARY-----------
-\\section{{Profile Summary}}
+\\section{{PROFILE SUMMARY}}
   \\vspace{{1pt}}
   \\small{{
     {summary_tex}
@@ -531,7 +597,7 @@ def build_tex(data):
   \\vspace{{-2pt}}
 
 %-----------TECHNICAL SKILLS-----------
-\\section{{Technical Skills}}
+\\section{{TECHNICAL SKILLS}}
  \\begin{{itemize}}[leftmargin=0.15in, label={{}}]
     \\small{{\\item{{
 {skills_tex}    }}}}
@@ -539,28 +605,21 @@ def build_tex(data):
  \\vspace{{-14pt}}
 
 %-----------EXPERIENCE-----------
-\\section{{Professional Experience}}
+\\section{{PROFESSIONAL EXPERIENCE}}
   \\resumeSubHeadingListStart
 {exp_tex}
   \\resumeSubHeadingListEnd
   \\vspace{{-12pt}}
 
-%-----------PROJECTS-----------
-\\section{{Projects}}
-  \\resumeSubHeadingListStart
-{proj_tex}
-  \\resumeSubHeadingListEnd
-  \\vspace{{-12pt}}
-
-%-----------EDUCATION-----------
-\\section{{Education}}
+{proj_section_tex}%-----------EDUCATION-----------
+\\section{{EDUCATION}}
   \\resumeSubHeadingListStart
 {edu_tex}
   \\resumeSubHeadingListEnd
   \\vspace{{-12pt}}
 
 %-----------CERTIFICATIONS & AWARDS-----------
-\\section{{Certifications \\& Awards}}
+\\section{{CERTIFICATIONS \\& AWARDS}}
  \\begin{{itemize}}[leftmargin=0.15in, label=\\tiny$\\bullet$]
 {cert_tex}
  \\end{{itemize}}

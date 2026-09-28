@@ -1,0 +1,81 @@
+{
+  "personal": {
+    "name": "Abhinandan Bajaj",
+    "phone": "+91 9041684910",
+    "location": "Bengaluru, India",
+    "email": "abhaybajaj135@gmail.com",
+    "linkedin": "https://linkedin.com/in/abhinandan-bajaj",
+    "github": "https://github.com/abhinandan-bajaj"
+  },
+  "summary": "<strong>DevOps Engineer</strong> with 3+ years of experience in designing, automating, and optimizing large-scale infrastructure across AWS, Azure, and GCP. Skilled in building automated CI/CD pipelines using Jenkins, GitHub Actions, and GitLab CI/CD, along with Infrastructure as Code using Terraform and Ansible. Experienced in Docker, Kubernetes, Linux, and scripting (Python, Bash), with strong expertise in monitoring and observability using Prometheus, Grafana, and Datadog.",
+  "skills": {
+    "Cloud Platforms": "AWS (EC2, S3, VPC, IAM, ALB, RDS, EKS, CloudWatch), Microsoft Azure (VMSS, AKS, Azure DevOps), GCP",
+    "IaC & Config Mgmt": "Terraform, Ansible, Ansible Tower (AWX), HashiCorp Packer, HashiCorp Vault",
+    "CI/CD & Version Control": "Jenkins, GitHub Actions, GitLab CI/CD, AWS CodePipeline, AWS CodeCommit, Git",
+    "Containers & Orchestr.": "Docker, Kubernetes (K8s), Helm",
+    "Monitoring & Observ.": "Prometheus, Grafana, Datadog, ELK / Elasticsearch",
+    "Programming, Scripting": "Python, Bash, Shell Scripting, PowerShell, Unix/Linux Administration",
+    "Databases": "PostgreSQL, MySQL, MongoDB, Oracle DB, Elasticsearch"
+  },
+  "experience": [
+    {
+      "company": "Accenture",
+      "date": "Jul 2023 – Present",
+      "role": "Packaged App Development Analyst (DevOps Engineer)",
+      "projects": [
+        {
+          "name": "Project: Alight Solutions (AWS Cloud & CI/CD Automation)",
+          "bullets": [
+            "Migrated 5+ enterprise applications across multiple AWS accounts, optimizing compute/storage utilization and reducing cloud infrastructure costs.",
+            "Engineered automated CI/CD pipelines using AWS CodeCommit, AWS CodePipeline, Jenkins, and GitHub Actions, accelerating deployment frequency and infrastructure rollout by <strong>40%</strong>.",
+            "Developed reusable, modular Terraform code for core AWS infrastructure (VPC, EC2, ALB, S3, IAM, RDS), enforcing state management best practices and cutting manual provisioning errors by <strong>70%</strong>.",
+            "Automated application configuration, patching, and secrets integration (HashiCorp Vault) across Linux servers using Ansible Collections and Ansible Tower (AWX) templates, reducing deployment time by <strong>50%</strong>.",
+            "Containerized microservices using Docker and orchestrated Kubernetes workloads via Helm charts for versioned, templated application deployments, integrating Datadog, ELK Stack (Elasticsearch, Logstash, Kibana), and CloudWatch for centralized log aggregation and real-time performance monitoring."
+          ]
+        },
+        {
+          "name": "Project: London Stock Exchange (LSE) Cloud Migration",
+          "bullets": [
+            "Architected and delivered cloud infrastructure and GitLab CI/CD pipeline solutions for 4 mission-critical financial applications, ensuring zero-downtime production releases.",
+            "Designed automated blue/green rollback mechanisms and pipeline quality gates that reduced deployment failure recovery time (MTTR) by <strong>95%+</strong>.",
+            "Implemented layered Terraform deployments across Azure and AWS for networking, Virtual Machine Scale Sets (VMSS), and relational/NoSQL databases (PostgreSQL, MySQL, MongoDB, Oracle DB), shortening provisioning timelines by <strong>30%</strong>.",
+            "Built self-healing infrastructure and observability dashboards using Prometheus and Grafana, configuring automated alerting and health-check remediation to maintain <strong>99.95%</strong> availability.",
+            "Executed High Availability (HA) and Disaster Recovery (DR) drills with active-passive failover strategies across multi-region environments.",
+            "Standardized golden VM and container images using HashiCorp Packer, Python, and Bash scripts for consistent, immutable environment provisioning."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "F13 Technologies",
+      "date": "Dec 2022 – Jun 2023",
+      "role": "Cloud & DevOps Engineer Intern",
+      "projects": [
+        {
+          "name": "",
+          "bullets": [
+            "Provisioned and optimized AWS and GCP cloud infrastructure (EC2, S3, IAM, VPC, Route53; GCP Compute Engine, Cloud Storage), improving application performance and system reliability by <strong>15%</strong>.",
+            "Automated routine infrastructure maintenance, log rotation, and backup workflows using Python, Bash, and PowerShell scripts, reducing manual operational toil by <strong>25%</strong>.",
+            "Collaborated with cross-functional engineering teams to troubleshoot Linux server, Docker container, and AWS networking issues, consistently resolving tickets within agreed SLA deadlines."
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [],
+  "education": [
+    {
+      "institution": "Guru Nanak Dev University",
+      "location": "Amritsar, India",
+      "degree": "B.Tech in Computer Science and Engineering (CSE) | CGPA: 8.27 / 10.0",
+      "period": "Jul 2019 – May 2023"
+    }
+  ],
+  "certifications": [
+    "<strong>Microsoft Certified:</strong> DevOps Engineer Expert (AZ-400)",
+    "<strong>Microsoft Certified:</strong> Azure Administrator Associate (AZ-104)",
+    "<strong>AWS Partner:</strong> AWS Cloud Practitioner Essentials & Cloud Economics Essentials",
+    "<strong>Accenture Extra Mile Award:</strong> Recognized for high-impact automation and efficient handling of critical production tasks.",
+    "<strong>Accenture ACE Award:</strong> Recognized for outstanding contribution and client impact through innovative technology solutions."
+  ]
+}

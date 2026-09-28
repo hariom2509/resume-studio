@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Resume Creator — Live Studio & UI Server
-Author: Resume Creator
+Author: Hari Om
 Description: Provides a zero-dependency local web studio for real-time resume
 previewing, A4 print layout inspection, live hot-reloading, and instant PDF/LaTeX export.
 """
@@ -40,7 +40,7 @@ STUDIO_HTML = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resume Studio — ATS Resume Template</title>
+<title>Resume Studio — Hari Om</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -490,10 +490,10 @@ STUDIO_HTML = """<!DOCTYPE html>
 <!-- Header -->
 <header>
   <div class="brand">
-    <div class="logo-icon">CV</div>
+    <div class="logo-icon">HO</div>
     <div class="brand-text">
       <h1>Resume Studio <span class="version-badge">Live ATS v1.1</span></h1>
-      <p>ATS-Optimized Single-Page Resume Template</p>
+      <p>Hari Om — GenAI & Software Engineer</p>
     </div>
   </div>
 
@@ -838,11 +838,38 @@ STUDIO_HTML = """<!DOCTYPE html>
 """
 
 
+LAST_COMPILED_JSON_HASH = None
+
+
+def sync_from_json_if_needed():
+    global LAST_COMPILED_JSON_HASH
+    current_json_hash = get_file_hash(DATA_FILE)
+    if not current_json_hash:
+        return False
+    if current_json_hash != LAST_COMPILED_JSON_HASH:
+        try:
+            import generate
+            d = generate.load_data()
+            if os.path.exists(HTML_FILE):
+                shutil.copyfile(HTML_FILE, BACKUP_FILE)
+            with open(HTML_FILE, "w", encoding="utf-8") as f:
+                f.write(generate.build_html(d))
+            with open(TEX_FILE, "w", encoding="utf-8") as f:
+                f.write(generate.build_tex(d))
+            LAST_COMPILED_JSON_HASH = current_json_hash
+            print(f"[*] Auto-compiled resume_data.json -> resume.html & resume.tex (Hash: {current_json_hash[:8]})")
+            return True
+        except Exception as e:
+            print(f"[!] Auto-compilation error: {e}")
+    return False
+
+
 class StudioHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         sys.stderr.write(f"[{time.strftime('%H:%M:%S')}] {format % args}\n")
 
     def do_GET(self):
+        sync_from_json_if_needed()
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
 
@@ -986,6 +1013,18 @@ class StudioHandler(BaseHTTPRequestHandler):
 
 
 def run_server(port=DEFAULT_PORT, open_browser=True):
+    # Initial compilation check
+    sync_from_json_if_needed()
+
+    # Background file watcher for instant live recompile
+    def watch_disk_changes():
+        while True:
+            time.sleep(1.0)
+            sync_from_json_if_needed()
+
+    watcher_thread = threading.Thread(target=watch_disk_changes, daemon=True)
+    watcher_thread.start()
+
     server = HTTPServer(("127.0.0.1", port), StudioHandler)
     url = f"http://localhost:{port}"
     print("=" * 60)
@@ -993,7 +1032,7 @@ def run_server(port=DEFAULT_PORT, open_browser=True):
     print(f"    - Live UI & Print Studio: {url}")
     print(f"    - Clean Standalone HTML:  {url}/resume.html")
     print(f"    - Raw LaTeX:              {url}/resume.tex")
-    print(f"    - Live Sync:              MD5 Watcher active on resume.html & resume_data.json")
+    print(f"    - Live Sync:              Active — edits to resume_data.json auto-compile & refresh!")
     print("=" * 60)
 
     if open_browser:
